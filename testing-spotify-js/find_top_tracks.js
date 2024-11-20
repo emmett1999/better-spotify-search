@@ -6,8 +6,7 @@
 //   scope: 'user-library-read user-read-email user-read-private'
 // }
 
-// Authorization token that must have been created previously. See : https://developer.spotify.com/documentation/web-api/concepts/authorization
-const token = 'BQB6gAUnbiJqTlptNAWfh9sYQV-zv60rA5xMprt0ZDzPzvNd4pcC6BueeRVCflWFQFs_RNLdEr9kvIG7qp86-3VKOBcfE51dL4br1b8HIs0MfUd714U9gjQCalqfB4OOzSqjr7Uru5TJIQn0gvV6ugNN3_kizPKgbicYxOyLbUVclT8TlfVaFRlQiPxaMDC40WJRhVm0dhRFFPRVoPYMCspeVY4pl750Ok7g4RRCFbvYo-2aOu06RrWo1GHwKc5ZsmP5RlT83FQp';
+const token = 'BQBCAkiumbEM98IE2WyDyXKXwuEVOwxIGZXQn4IK_zpc8CI7paBHl7O67wP8Dv5y3MClswVs2iDqMiFa3ZGCZHFdWQN9fbuzb6F_BeZioSxS4dFC3Fgz85USeqIC52Qe2lTc_H0sM9lS1hdfNA_k9ipl9IxiMRdtFWVyEocFmmid1GcVl76wOoIrLkGmjkom8uzo0DdcjWw4fe6w5MoyrRyMaJprYIzIZnow-31Y0aQtnmG71Wp_w3CwRiWAwBJV50XwREMgPLf4';
 async function fetchWebApi(endpoint, method, body) {
   const res = await fetch(`https://api.spotify.com/${endpoint}`, {
     headers: {
