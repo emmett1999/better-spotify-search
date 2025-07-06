@@ -35,9 +35,9 @@ async function run() {
   const initialUrl = 'https://api.spotify.com/v1/me/albums?offset=0&limit=50';
 
   var albumsResponse = await getAllAlbums(initialUrl);
-  if(!albumsResponse) {
+  if(!albumsResponse || !albumsResponse.items) {
     // console.error(new Error("No initial album response"));
-    throw "No albums response";
+    throw "No albums in Spotify response";
   }
   
   var masterAlbumInfoList = [];
