@@ -1,11 +1,19 @@
+// .env import
+require('dotenv').config();
+
+// imports
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
 
+// routers
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
+var albumsRouter = require('./routes/albums');
+var summaryRouter = require('./routes/summary');
 
 var app = express();
 
@@ -17,11 +25,27 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// session setup
+// TODO: investigate these session properties and determine the best settings to use
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'fallback-secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { 
+    secure: process.env.NODE_ENV === 'production', // true only if behind HTTPS
+    httpOnly: true, // protect against XSS
+    sameSite: 'lax' // helps CSRF protection
+  }
+}));
+// ---------------------
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
-
+app.use('/albums', albumsRouter);
+app.use('/summary', summaryRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

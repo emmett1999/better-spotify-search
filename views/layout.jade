@@ -1,7 +1,147 @@
 doctype html
-html
+html(lang='en')
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width')
+    title=title
+    link(rel='stylesheet', href='https://unpkg.com/missing.css@1.2.0')
+    link(rel='icon' href='/img/logo/missing-logo.svg')
+    link(rel='stylesheet' href='/dist/missing.css')
+    link(rel='stylesheet' href='/dist/missing-prism.css')
+    link(rel='stylesheet' href='https://fonts.bunny.net/css?family=source-sans-3:400,700|m-plus-code-latin:400,700')
+    style.
+      :root {
+      --main-font: "Source Sans 3", -apple-system, system-ui, sans-serif;
+      }
+      dfn > code {
+      font-style: normal;
+      text-decoration: 1px dashed var(--muted-fg) underline;
+      }
+      code a {
+      font-family: inherit;
+      }
+      nav.table-of-contents {
+      & ul { padding-inline-start: 2ch; }
+      & li::marker { font-family: var(--mono-font); }
+      }
+      .nav-right {
+        margin-left: auto;
+        display: flex;
+      }
+
+
+  //- body
+  //-   header
+  //-     nav
+  //-       ul
+  //-         li: a(href="#", id="top-albums-btn") Top 100 Albums
+  //-         li: a(href="/login/authorize", id="login-btn") Login
+  //-   block content
+  //-   script(src="/javascripts/main.js")
+
   body
+    header
+      h1.flex-row.crowded
+        img(src='/images/moai.png' style='width: 1.5lh; aspect-ratio: 1/1;')
+        span.flex-column.packed
+          span.allcaps
+            | #{title}
+            //- not sure I will need a line break here
+            //- wbr
+            v-h :
+          sub-title Spotify do be lackin a bit at times
+      nav
+        span.flex-row
+          p.tool-bar
+            a(href='/summary') Summary
+          p.tool-bar.nav-right
+            a(href='https://github.com/bigskysoftware/missing') GitHub
+            a(href='https://htmx.org/discord') Discord
+            a(href="/login/authorize" id="login-btn") Login
+  main
     block content
+    script(src="/javascripts/main.js")
+
+    //- main
+    //-   p
+    //-     | Missing.css is the CSS library we wished already existed.
+    //-     | Add it to your website:
+    //-   p
+    //-     code.language-html
+    //-       span.token.tag
+    //-         span.token.tag
+    //-           span.token.punctuation <
+    //-           | link
+    //-         span.token.attr-name rel
+    //-         span.token.attr-value
+    //-           span.token.punctuation.attr-equals =
+    //-           | stylesheet
+    //-         span.token.attr-name href
+    //-         span.token.attr-value
+    //-           span.token.punctuation.attr-equals =
+    //-           | https://unpkg.com/missing.css@1.2.0
+    //-         span.token.punctuation >
+    //-   ul.flex-switch.dense(class='align-items:stretch' role='list')
+    //-     li.box
+    //-       | It starts with decent default styling for vanilla HTML, akin to 
+    //-       strong classless CSS
+    //-       |  libraries, that can be customized with 
+    //-       strong CSS variables.
+    //-     li.box
+    //-       | It offers a small set of 
+    //-       strong components
+    //-       |  based on well-known, semantic markup patterns, with ARIA where appropriate.
+    //-     li.box
+    //-       | Finally, it offers a small & curated set of 
+    //-       strong utility classes
+    //-       |  and 
+    //-       strong custom elements
+    //-       |  for the things HTML hasn't caught up with yet.
+    //-   p
+    //-     | The goal of missing.css is to reduce needed intervention in HTML. It lets
+    //-     | authors
+    //-   ul.flow-gap.dense
+    //-     li start with a good out-of-the-box experience,
+    //-     li customize it easily, even create multiple themes,
+    //-     li build common components using plain, semantic HTML,
+    //-     li create unique sites by applying utility classes as needed.
+    //-   p
+    //-     | Our target for browser support is 
+    //-     strong
+    //-       code.color "> 0.9% and last 2 versions and not dead"
+    //-     | .
+    //-     | You can view the implications of this on 
+    //-     a(href='https://browsersl.ist/#q=> 0.9% and last 2 versions and not dead') browsersl.ist
+    //-     | .
+    //-   //
+    //-     Though it's quite early, there are a few sites using missing.css:
+    //-     - <https://hyperscript.org>
+    //-     - <https://denizaksimsek.com>
+    //-     - <https://github.com/chapmandu/cfwheels-htmx-crud>
+    //-     - <https://www.davidaflood.com>
+    //-   p
+    //-     | Missing.css is a notch on the complexity slider that's just right for small projects and personal sites where
+    //-     | classless CSS is not enough,
+    //-     | Tailwind is too much, and
+    //-     | Bootstrap just doesn't have the right vibe.
+    //-   p
+    //-     | We also have a 
+    //-     a(href='/docs/js') JavaScript library
+    //-     |  and a 
+    //-     a(href='https://prismjs.com') Prism
+    //-     |  syntax theme.
+
+    //- TODO: customize footer
+    footer
+      p
+        a(href='/') #{title} 
+        //- TODO: create a personal site at some point
+        |  by Emmett Krochock, created using 
+        a(href='https://expressjs.com/') ExpressJS
+        |  and 
+        a(href='https://missing.style/') missing.css
+        |.
+      p
+        |Also check out the
+        a(href='https://github.com/emmett1999/better-spotify-search') GitHub page
+

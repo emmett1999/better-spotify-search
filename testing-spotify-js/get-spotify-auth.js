@@ -34,7 +34,7 @@ async function getAuthToken() {
 }
   
 async function run() {
-    console.log(topAlbums);
+  getAuthToken();
 }
 
 

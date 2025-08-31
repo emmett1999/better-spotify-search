@@ -2,9 +2,13 @@ var express = require('express');
 const querystring = require("querystring"); 
 var router = express.Router();
 
-var redirect_uri = 'http://localhost:3000/login';
-const client_id = 'xxxxxxxxxxxxxxxx';
-const client_secret = 'xxxxxxxxxxxxxxxx';
+const client_id = process.env.SPOTIFY_CLIENT_ID;
+const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
+const redirect_uri = process.env.SPOTIFY_REDIRECT_URI;
+
+// var redirect_uri = 'http://localhost:3000/login'; 
+// const client_id = '246de0b4a6154d4abdb10e82f1c53f94'; 
+// const client_secret = 'e6ebe06885aa44f2b1e10d8d11200842';
 
 /* Get authorization token */
 router.get('/authorize', function(req, res) {
@@ -14,6 +18,8 @@ router.get('/authorize', function(req, res) {
 
   const spotify_auth_uri = 'https://accounts.spotify.com/authorize?';
   console.log("Requesting Spotify auth token using URI: " + spotify_auth_uri);
+  console.log("client_Id: ", client_id);
+  console.log("client_secret: ", client_secret);
 
   res.redirect(spotify_auth_uri +
       querystring.stringify({
@@ -36,7 +42,7 @@ function generateRandomString(length) {
 }
 
 /* Get access token */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   var code = req.query.code || null;
   var state = req.query.state || null;
 
@@ -50,26 +56,49 @@ router.get('/', function(req, res, next) {
     const spotify_access_uri = 'https://accounts.spotify.com/api/token';
     console.log('Requesting Spotify access token using: ' + spotify_access_uri);
 
+    // TODO: see if I need this async block here
     (async () => {
-      const accessResult = await fetch(spotify_access_uri, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Basic ' + (new Buffer.from(client_id + ':' + client_secret).toString('base64'))
-        },
-        body: querystring.stringify({
-          grant_type: 'authorization_code',
-          code: code,
-          redirect_uri: redirect_uri
-        })
-      });
 
-      const resultJson = await accessResult.json();
-      console.log("Result JSON: ", resultJson);
+      try {
+        const accessResult = await fetch(spotify_access_uri, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Basic ' + (new Buffer.from(client_id + ':' + client_secret).toString('base64'))
+          },
+          body: querystring.stringify({
+            grant_type: 'authorization_code',
+            code: code,
+            redirect_uri: redirect_uri
+          })
+        });
+  
+        const resultJson = await accessResult.json();
+        console.log("Result JSON: ", resultJson);
+
+        req.session.isAuthenticated = true;
+        req.session.access_token = resultJson.access_token;
+        req.session.refresh_token = resultJson.refresh_token;
+        req.session.expires_in = resultJson.expires_in;
+
+        res.redirect('/');
+
+      } catch (err) {
+        console.error(err);
+        res.redirect('/#' + querystring.stringify({ error: 'invalid_token' }));
+      }
     })();
-
-    res.redirect('/');
   }
+});
+
+router.get('/status', (req, res) => {
+  res.json({ isAuthenticated: !!req.session.isAuthenticated });
+});
+
+router.get('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.redirect('/');
+  });
 });
 
 module.exports = router;
