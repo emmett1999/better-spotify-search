@@ -13,9 +13,13 @@ var session = require('express-session');
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var albumsRouter = require('./routes/albums');
+var allAlbumsRouter = require('./routes/all-albums');
 var summaryRouter = require('./routes/summary');
 
 var app = express();
+
+// global variables
+app.locals.title = 'better-spotify-search';
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -45,6 +49,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/albums', albumsRouter);
+app.use('/all-albums', allAlbumsRouter);
 app.use('/summary', summaryRouter);
 
 // catch 404 and forward to error handler

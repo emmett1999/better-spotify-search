@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1 All albums
+  p These are all your albums my guy
+  ul
+    each album in albums
+      li
+        strong #{album.albumName}
+        | - 
+        span #{album.albumArtists.join(', ')}

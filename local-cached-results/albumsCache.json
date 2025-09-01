@@ -1046,6 +1046,12 @@
     ]
   },
   {
+    "albumName": "Mingus Ah Um",
+    "albumArtists": [
+      "Charles Mingus"
+    ]
+  },
+  {
     "albumName": "The Black Saint And The Sinner Lady",
     "albumArtists": [
       "Charles Mingus"
@@ -1190,6 +1196,12 @@
     "albumName": "cLOUDDEAD (Deluxe Edition)",
     "albumArtists": [
       "cLOUDDEAD"
+    ]
+  },
+  {
+    "albumName": "Milk & Kisses",
+    "albumArtists": [
+      "Cocteau Twins"
     ]
   },
   {
@@ -1372,6 +1384,18 @@
   },
   {
     "albumName": "Atoma",
+    "albumArtists": [
+      "Dark Tranquillity"
+    ]
+  },
+  {
+    "albumName": "Construct",
+    "albumArtists": [
+      "Dark Tranquillity"
+    ]
+  },
+  {
+    "albumName": "Damage Done",
     "albumArtists": [
       "Dark Tranquillity"
     ]
@@ -1806,6 +1830,12 @@
     "albumName": "Stratosphere",
     "albumArtists": [
       "Duster"
+    ]
+  },
+  {
+    "albumName": "Live Laugh Love",
+    "albumArtists": [
+      "Earl Sweatshirt"
     ]
   },
   {
@@ -2690,7 +2720,7 @@
     ]
   },
   {
-    "albumName": "Reroute To Remain",
+    "albumName": "Colony",
     "albumArtists": [
       "In Flames"
     ]
@@ -2702,7 +2732,7 @@
     ]
   },
   {
-    "albumName": "Colony",
+    "albumName": "Reroute To Remain",
     "albumArtists": [
       "In Flames"
     ]
@@ -2762,6 +2792,12 @@
     ]
   },
   {
+    "albumName": "Piece of Mind (2015 Remaster)",
+    "albumArtists": [
+      "Iron Maiden"
+    ]
+  },
+  {
     "albumName": "The Number of the Beast (2015 Remaster)",
     "albumArtists": [
       "Iron Maiden"
@@ -2774,7 +2810,7 @@
     ]
   },
   {
-    "albumName": "Piece of Mind (2015 Remaster)",
+    "albumName": "Iron Maiden (2015 Remaster)",
     "albumArtists": [
       "Iron Maiden"
     ]
@@ -3444,6 +3480,12 @@
     "albumName": "Computer World (2009 Remaster)",
     "albumArtists": [
       "Kraftwerk"
+    ]
+  },
+  {
+    "albumName": "Violent Revolution",
+    "albumArtists": [
+      "Kreator"
     ]
   },
   {
@@ -4127,6 +4169,12 @@
     ]
   },
   {
+    "albumName": "The Moon & Antarctica",
+    "albumArtists": [
+      "Modest Mouse"
+    ]
+  },
+  {
     "albumName": "This Is a Long Drive for Someone with Nothing to Think About",
     "albumArtists": [
       "Modest Mouse"
@@ -4140,12 +4188,6 @@
   },
   {
     "albumName": "The Fruit That Ate Itself",
-    "albumArtists": [
-      "Modest Mouse"
-    ]
-  },
-  {
-    "albumName": "The Moon & Antarctica",
     "albumArtists": [
       "Modest Mouse"
     ]
@@ -4711,13 +4753,13 @@
     ]
   },
   {
-    "albumName": "Cowboys from Hell",
+    "albumName": "Vulgar Display of Power",
     "albumArtists": [
       "Pantera"
     ]
   },
   {
-    "albumName": "Vulgar Display of Power",
+    "albumName": "Cowboys from Hell",
     "albumArtists": [
       "Pantera"
     ]

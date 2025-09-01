@@ -6,10 +6,6 @@ const client_id = process.env.SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const redirect_uri = process.env.SPOTIFY_REDIRECT_URI;
 
-// var redirect_uri = 'http://localhost:3000/login'; 
-// const client_id = '246de0b4a6154d4abdb10e82f1c53f94'; 
-// const client_secret = 'e6ebe06885aa44f2b1e10d8d11200842';
-
 /* Get authorization token */
 router.get('/authorize', function(req, res) {
 
@@ -18,8 +14,6 @@ router.get('/authorize', function(req, res) {
 
   const spotify_auth_uri = 'https://accounts.spotify.com/authorize?';
   console.log("Requesting Spotify auth token using URI: " + spotify_auth_uri);
-  console.log("client_Id: ", client_id);
-  console.log("client_secret: ", client_secret);
 
   res.redirect(spotify_auth_uri +
       querystring.stringify({
@@ -54,7 +48,7 @@ router.get('/', function(req, res) {
       }));
   } else {
     const spotify_access_uri = 'https://accounts.spotify.com/api/token';
-    console.log('Requesting Spotify access token using: ' + spotify_access_uri);
+    console.log('Requesting Spotify access token using URI: ' + spotify_access_uri);
 
     // TODO: see if I need this async block here
     (async () => {
@@ -74,15 +68,18 @@ router.get('/', function(req, res) {
         });
   
         const resultJson = await accessResult.json();
-        console.log("Result JSON: ", resultJson);
+        if(process.env.NODE_ENV === 'development') {
+          console.log("Result JSON: ", resultJson);
+        }
 
+        // store access credentials in session
         req.session.isAuthenticated = true;
         req.session.access_token = resultJson.access_token;
         req.session.refresh_token = resultJson.refresh_token;
         req.session.expires_in = resultJson.expires_in;
 
+        // TODO: in the future, possibly redirect to /summary here
         res.redirect('/');
-
       } catch (err) {
         console.error(err);
         res.redirect('/#' + querystring.stringify({ error: 'invalid_token' }));

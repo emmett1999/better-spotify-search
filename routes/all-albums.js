@@ -9,7 +9,7 @@ router.get('/', async function (req, res, next) {
 
   try {
     const albums = await getUserAlbums(req);
-    res.render('summary', {
+    res.render('all-albums', {
       albums: albums
     });
   } catch (err) {

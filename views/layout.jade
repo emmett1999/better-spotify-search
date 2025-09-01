@@ -5,44 +5,23 @@ html(lang='en')
     meta(name='viewport' content='width=device-width')
     title=title
     link(rel='stylesheet', href='https://unpkg.com/missing.css@1.2.0')
-    link(rel='icon' href='/img/logo/missing-logo.svg')
-    link(rel='stylesheet' href='/dist/missing.css')
-    link(rel='stylesheet' href='/dist/missing-prism.css')
-    link(rel='stylesheet' href='https://fonts.bunny.net/css?family=source-sans-3:400,700|m-plus-code-latin:400,700')
+    //- TODO: get a real icon to use
+    //- link(rel='icon' href='/img/logo/missing-logo.svg')
     style.
-      :root {
-      --main-font: "Source Sans 3", -apple-system, system-ui, sans-serif;
-      }
-      dfn > code {
-      font-style: normal;
-      text-decoration: 1px dashed var(--muted-fg) underline;
-      }
-      code a {
-      font-family: inherit;
-      }
-      nav.table-of-contents {
-      & ul { padding-inline-start: 2ch; }
-      & li::marker { font-family: var(--mono-font); }
+      /* TODO: remove this once I handle 1000 elements not displaying on a page */
+      html {
+        overflow-y: scroll; /* reserving space for the scrollbar when there are many elements */
       }
       .nav-right {
         margin-left: auto;
         display: flex;
       }
 
-
-  //- body
-  //-   header
-  //-     nav
-  //-       ul
-  //-         li: a(href="#", id="top-albums-btn") Top 100 Albums
-  //-         li: a(href="/login/authorize", id="login-btn") Login
-  //-   block content
-  //-   script(src="/javascripts/main.js")
-
   body
     header
       h1.flex-row.crowded
-        img(src='/images/moai.png' style='width: 1.5lh; aspect-ratio: 1/1;')
+        a(href='/')
+          img(src='/images/moai.png' style='width: 1.5lh; aspect-ratio: 1/1;')
         span.flex-column.packed
           span.allcaps
             | #{title}
@@ -54,13 +33,12 @@ html(lang='en')
         span.flex-row
           p.tool-bar
             a(href='/summary') Summary
+            a(href='/all-albums') All Albums
           p.tool-bar.nav-right
-            a(href='https://github.com/bigskysoftware/missing') GitHub
-            a(href='https://htmx.org/discord') Discord
             a(href="/login/authorize" id="login-btn") Login
-  main
-    block content
-    script(src="/javascripts/main.js")
+    main
+      block content
+      script(src="/javascripts/main.js")
 
     //- main
     //-   p
@@ -131,17 +109,16 @@ html(lang='en')
     //-     a(href='https://prismjs.com') Prism
     //-     |  syntax theme.
 
-    //- TODO: customize footer
     footer
       p
         a(href='/') #{title} 
-        //- TODO: create a personal site at some point
+        //- TODO: create a personal site at some point. maybe also using express and missing.css
         |  by Emmett Krochock, created using 
         a(href='https://expressjs.com/') ExpressJS
         |  and 
         a(href='https://missing.style/') missing.css
         |.
       p
-        |Also check out the
+        |Also check out the 
         a(href='https://github.com/emmett1999/better-spotify-search') GitHub page
 
