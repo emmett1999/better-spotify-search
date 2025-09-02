@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { getUserAlbums } = require('../services/spotify/find_top_albums.js');
+const { getTopUserTracks } = require('../services/spotify/find_top_albums.js');
 
 router.get('/', async function (req, res, next) {
   if (!req.session.isAuthenticated) {
@@ -8,9 +8,9 @@ router.get('/', async function (req, res, next) {
   }
 
   try {
-    const albums = await getUserAlbums(req);
+    const tracks = await getTopUserTracks(req);
     res.render('summary', {
-      albums: albums
+      tracks: tracks
     });
   } catch (err) {
     next(err);

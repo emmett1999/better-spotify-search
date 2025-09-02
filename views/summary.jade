@@ -1,8 +1,19 @@
 extends layout
 
+style.
+  //- div flex-row {
+  //-   vertical-align: middle;
+  //- }
+
 block content
-  h1 Summary
-  p These are all your albums my guy
-  ul
-    each album in albums
-      li #{album.albumName}
+  h1 Top Tracks
+  p These are your top tracks my guy
+  ul.flow-gap.dense
+    each track in tracks
+      li
+        div.flex-row.crowded
+          img(src=track.albumArt, style='width: 5em; aspect-ratio: 1/1; object-fit: cover;')
+          div.flex-column.packed
+            strong #{track.trackName} by #{track.artists.join(', ')}
+            span #{track.albumName}
+

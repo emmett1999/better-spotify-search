@@ -10,7 +10,7 @@ const redirect_uri = process.env.SPOTIFY_REDIRECT_URI;
 router.get('/authorize', function(req, res) {
 
   var state = generateRandomString(16);
-  var scope = 'user-read-private user-read-email user-library-read';
+  var scope = 'user-read-private user-read-email user-library-read user-top-read';
 
   const spotify_auth_uri = 'https://accounts.spotify.com/authorize?';
   console.log("Requesting Spotify auth token using URI: " + spotify_auth_uri);

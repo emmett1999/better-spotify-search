@@ -1,32 +1,56 @@
 
-const token = 'BQBCAkiumbEM98IE2WyDyXKXwuEVOwxIGZXQn4IK_zpc8CI7paBHl7O67wP8Dv5y3MClswVs2iDqMiFa3ZGCZHFdWQN9fbuzb6F_BeZioSxS4dFC3Fgz85USeqIC52Qe2lTc_H0sM9lS1hdfNA_k9ipl9IxiMRdtFWVyEocFmmid1GcVl76wOoIrLkGmjkom8uzo0DdcjWw4fe6w5MoyrRyMaJprYIzIZnow-31Y0aQtnmG71Wp_w3CwRiWAwBJV50XwREMgPLf4';
-async function fetchWebApi(endpoint, method, body) {
-  const res = await fetch(`https://api.spotify.com/${endpoint}`, {
+const accessToken = 'BQDllN9m_tX3O5V6Fe1Q_MBXiRQWktZ2vQR6ON1fjcez7tL8dmr5VfGurZc2F-6EgllvSnEtmqXxmOLVEY8LFYoUR7zidiX1GHxyYFkd6u1_cdnfqxLZR7UJY8MNtw0gwc7MXJE49FIrYnkMkmjYUa1S4unHmqSm7tMGgs6nfc62O-wzJTsS0Q_zPOsnz6QskRm1TWyK7i21AgazRxYtQPXgW5vbI6DMmSKvb_QLgqeOeEbY4wgolxnUQg';
+
+async function run() {
+  const tracks = await fetchTopUserTracksFromSpotify(accessToken);
+  // console.debug("Tracks:", tracks);
+  const topTracks = tracks.items.map(track => ({
+    trackName: track.name,
+    trackArtists: track.artists.map(a => a.name),
+    albumName: track.album.name,
+    albumImage: track.album.images?.[0]?.url
+  }));
+  console.debug("Tracks:", topTracks);
+}
+
+// const topTracks = await getTopTracks();
+// console.log(topTracks);
+// console.log(
+//     topTracks?.map(
+//         ({name, artists}) =>
+//         `${name} by ${artists.map(artist => artist.name).join(', ')}`
+//     )
+// );
+
+async function fetchTopUserTracksFromSpotify(accessToken) {
+  const initialUrl = 'https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=5';
+  let tracksResponse = await getTopTracks(initialUrl, accessToken);
+
+  if (!tracksResponse || !tracksResponse.items) {
+    throw new Error("No tracks in top tracks response");
+  }
+
+  // console.debug("Top tracks JSON:", JSON.stringify(tracksResponse));
+
+  return tracksResponse;
+}
+
+async function getTopTracks(url, token){
+  return (await fetchWebApi(url, 'GET', token));
+}
+
+async function fetchWebApi(url, method, token) {
+  // console.debug("Auth token:", token);
+
+  const res = await fetch(url, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
     method,
-    body:JSON.stringify(body)
+    // body: body ? JSON.stringify(body) : undefined,
   });
-  return await res.json();
-}
 
-async function getTopTracks(){
-  // Endpoint reference : https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks
-  return (await fetchWebApi(
-    'v1/me/top/tracks?time_range=long_term&limit=5', 'GET'
-  )).items;
-}
-
-async function run() {
-    const topTracks = await getTopTracks();
-    console.log(topTracks);
-    console.log(
-        topTracks?.map(
-            ({name, artists}) =>
-            `${name} by ${artists.map(artist => artist.name).join(', ')}`
-        )
-    );
+  return res.json();
 }
 
 run();
