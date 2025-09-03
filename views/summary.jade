@@ -1,19 +1,28 @@
 extends layout
 
-style.
-  //- div flex-row {
-  //-   vertical-align: middle;
-  //- }
+//- style(type="text/css").
+//-     .flex-row.track-row {
+//-         height: 100em; /* same as image height */
+//-     }
+
+//-     .track-row-content {
+//-         justify-content: center;
+//-         align-items: flex-start;
+//-         font-size: 1.2em;
+//-     }
 
 block content
   h1 Top Tracks
   p These are your top tracks my guy
-  ul.flow-gap.dense
+  ul.flow-gap.dense(role='list')
     each track in tracks
       li
-        div.flex-row.crowded
+        div.flex-row.crowded.track-row
           img(src=track.albumArt, style='width: 5em; aspect-ratio: 1/1; object-fit: cover;')
-          div.flex-column.packed
-            strong #{track.trackName} by #{track.artists.join(', ')}
+          div.flex-column.packed(style='justify-content: center; align-items: flex-start; font-size: 1.2em;')
+            div
+              strong #{track.trackName}
+              |  by 
+              span #{track.artists.join(', ')}
             span #{track.albumName}
 
