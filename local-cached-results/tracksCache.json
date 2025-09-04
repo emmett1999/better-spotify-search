@@ -1,0 +1,52 @@
+[
+  {
+    "trackName": "Cherry-coloured Funk",
+    "artists": [
+      "Cocteau Twins"
+    ],
+    "albumName": "Heaven or Las Vegas",
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2735d2fdd1564ccab97e60c656f",
+    "spotifyUrl": "https://open.spotify.com/track/37pKTyMwalomKCZjxTc2QZ",
+    "duration": 192466
+  },
+  {
+    "trackName": "wacced out murals",
+    "artists": [
+      "Kendrick Lamar"
+    ],
+    "albumName": "GNX",
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b273d9985092cd88bffd97653b58",
+    "spotifyUrl": "https://open.spotify.com/track/5gOfC9UzZQzTyShqPMrpjT",
+    "duration": 317092
+  },
+  {
+    "trackName": "Moonshield",
+    "artists": [
+      "In Flames"
+    ],
+    "albumName": "The Jester Race (Black Ash-Inheritance Version)",
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2737b967d82647ad3a36a098334",
+    "spotifyUrl": "https://open.spotify.com/track/3gqdwcfzDsJvuPQ8oSZCxq",
+    "duration": 301666
+  },
+  {
+    "trackName": "Diving Woman",
+    "artists": [
+      "Japanese Breakfast"
+    ],
+    "albumName": "Soft Sounds from Another Planet",
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b273e280ed04a8e7cf1ad8acf4ad",
+    "spotifyUrl": "https://open.spotify.com/track/6V7c8Dd40BKFqWIYS5zTXx",
+    "duration": 392600
+  },
+  {
+    "trackName": "Aces High (2015 Remaster)",
+    "artists": [
+      "Iron Maiden"
+    ],
+    "albumName": "Powerslave (2015 Remaster)",
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2733ded3536cb48366d6da06a2f",
+    "spotifyUrl": "https://open.spotify.com/track/7klQm1UOICdgXPTuIATaCX",
+    "duration": 271906
+  }
+]

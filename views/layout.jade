@@ -34,80 +34,20 @@ html(lang='en')
           p.tool-bar
             a(href='/summary') Summary
             a(href='/all-albums') All Albums
+            a(href='/login/player-token') Player token test
           p.tool-bar.nav-right
             a(href="/login/authorize" id="login-btn") Login
     main
       block content
+      // TODO: ************ NEW SHIT I GOTTA VERIFY BELOW ************
+      div#player-bar(style="position:fixed; bottom:0; left:0; right:0; height: 4em; background:#222; color:#fff; padding:0.5em; display:flex; align-items:center;")
+        span.track-info(style="flex:1; color:#fff;") Nothing playing
+        button#play-btn ▶️
+        button#pause-btn ⏸️
       script(src="/javascripts/main.js")
+      // TODO: ************ NEW SHIT I GOTTA VERIFY ABOVE ************
 
-    //- main
-    //-   p
-    //-     | Missing.css is the CSS library we wished already existed.
-    //-     | Add it to your website:
-    //-   p
-    //-     code.language-html
-    //-       span.token.tag
-    //-         span.token.tag
-    //-           span.token.punctuation <
-    //-           | link
-    //-         span.token.attr-name rel
-    //-         span.token.attr-value
-    //-           span.token.punctuation.attr-equals =
-    //-           | stylesheet
-    //-         span.token.attr-name href
-    //-         span.token.attr-value
-    //-           span.token.punctuation.attr-equals =
-    //-           | https://unpkg.com/missing.css@1.2.0
-    //-         span.token.punctuation >
-    //-   ul.flex-switch.dense(class='align-items:stretch' role='list')
-    //-     li.box
-    //-       | It starts with decent default styling for vanilla HTML, akin to 
-    //-       strong classless CSS
-    //-       |  libraries, that can be customized with 
-    //-       strong CSS variables.
-    //-     li.box
-    //-       | It offers a small set of 
-    //-       strong components
-    //-       |  based on well-known, semantic markup patterns, with ARIA where appropriate.
-    //-     li.box
-    //-       | Finally, it offers a small & curated set of 
-    //-       strong utility classes
-    //-       |  and 
-    //-       strong custom elements
-    //-       |  for the things HTML hasn't caught up with yet.
-    //-   p
-    //-     | The goal of missing.css is to reduce needed intervention in HTML. It lets
-    //-     | authors
-    //-   ul.flow-gap.dense
-    //-     li start with a good out-of-the-box experience,
-    //-     li customize it easily, even create multiple themes,
-    //-     li build common components using plain, semantic HTML,
-    //-     li create unique sites by applying utility classes as needed.
-    //-   p
-    //-     | Our target for browser support is 
-    //-     strong
-    //-       code.color "> 0.9% and last 2 versions and not dead"
-    //-     | .
-    //-     | You can view the implications of this on 
-    //-     a(href='https://browsersl.ist/#q=> 0.9% and last 2 versions and not dead') browsersl.ist
-    //-     | .
-    //-   //
-    //-     Though it's quite early, there are a few sites using missing.css:
-    //-     - <https://hyperscript.org>
-    //-     - <https://denizaksimsek.com>
-    //-     - <https://github.com/chapmandu/cfwheels-htmx-crud>
-    //-     - <https://www.davidaflood.com>
-    //-   p
-    //-     | Missing.css is a notch on the complexity slider that's just right for small projects and personal sites where
-    //-     | classless CSS is not enough,
-    //-     | Tailwind is too much, and
-    //-     | Bootstrap just doesn't have the right vibe.
-    //-   p
-    //-     | We also have a 
-    //-     a(href='/docs/js') JavaScript library
-    //-     |  and a 
-    //-     a(href='https://prismjs.com') Prism
-    //-     |  syntax theme.
+
 
     footer
       p

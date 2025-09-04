@@ -34,7 +34,7 @@ async function getUserAlbums(req) {
 
   // DEV: Write to local cache. At this point, albums do not exist in the cache
   if (process.env.NODE_ENV === 'development') {
-    await tryWriteLocalCache(albums);
+    await tryWriteLocalCache(ALBUMS_CACHE_FILE, albums);
   }
 
   return albums;
@@ -70,7 +70,7 @@ async function getTopUserTracks(req) {
 
   // DEV: Write to local cache. At this point, albums do not exist in the cache
   if (process.env.NODE_ENV === 'development') {
-    await tryWriteLocalCache(tracks);
+    await tryWriteLocalCache(TRACK_CACHE_FILE, tracks);
   }
 
   return tracks;
@@ -88,9 +88,9 @@ async function tryReadLocalCache(cacheFile) {
   }
 }
 
-async function tryWriteLocalCache(albums) {
+async function tryWriteLocalCache(cacheFile, albums) {
   try {
-    await fs.writeFile(ALBUMS_CACHE_FILE, JSON.stringify(albums, null, 2));
+    await fs.writeFile(cacheFile, JSON.stringify(albums, null, 2));
     console.log("Local cache file updated");
   } catch (err) {
     console.error("Failed to write local cache:", err);
@@ -107,7 +107,7 @@ async function sortAlbumsByFirstArtistName(albumInfoList) {
 
 async function fetchAlbumsFromSpotify(accessToken) {
   const initialUrl = 'https://api.spotify.com/v1/me/albums?offset=0&limit=50';
-  let albumsResponse = await getAllAlbums(initialUrl, accessToken);
+  let albumsResponse = await performSpotifyGetRequest(initialUrl, accessToken);
   let masterAlbumInfoList = [];
 
   if (!albumsResponse || !albumsResponse.items) {

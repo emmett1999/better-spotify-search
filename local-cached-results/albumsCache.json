@@ -1205,6 +1205,12 @@
     ]
   },
   {
+    "albumName": "The Pink Opaque",
+    "albumArtists": [
+      "Cocteau Twins"
+    ]
+  },
+  {
     "albumName": "Heaven or Las Vegas",
     "albumArtists": [
       "Cocteau Twins"
@@ -1383,13 +1389,13 @@
     ]
   },
   {
-    "albumName": "Atoma",
+    "albumName": "Construct",
     "albumArtists": [
       "Dark Tranquillity"
     ]
   },
   {
-    "albumName": "Construct",
+    "albumName": "Atoma",
     "albumArtists": [
       "Dark Tranquillity"
     ]
@@ -2798,13 +2804,13 @@
     ]
   },
   {
-    "albumName": "The Number of the Beast (2015 Remaster)",
+    "albumName": "Powerslave (2015 Remaster)",
     "albumArtists": [
       "Iron Maiden"
     ]
   },
   {
-    "albumName": "Powerslave (2015 Remaster)",
+    "albumName": "The Number of the Beast (2015 Remaster)",
     "albumArtists": [
       "Iron Maiden"
     ]
