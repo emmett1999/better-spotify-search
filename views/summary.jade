@@ -17,7 +17,7 @@ block content
   ul.flow-gap.dense(role='list')
     each track in tracks
       li
-        div.flex-row.crowded.track-row
+        div.flex-row.crowded(data-spotify-uri=track.spotifyUrl)
           img(src=track.albumArt, style='width: 5em; aspect-ratio: 1/1; object-fit: cover;')
           div.flex-column.packed(style='justify-content: center; align-items: flex-start; font-size: 1.2em;')
             div
