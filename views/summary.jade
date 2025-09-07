@@ -1,15 +1,17 @@
 extends layout
 
-//- style(type="text/css").
-//-     .flex-row.track-row {
-//-         height: 100em; /* same as image height */
-//-     }
-
-//-     .track-row-content {
-//-         justify-content: center;
-//-         align-items: flex-start;
-//-         font-size: 1.2em;
-//-     }
+style(type="text/css").
+  .track-row {
+    cursor: pointer; /* shows it’s clickable */
+    transition: background 0.2s;
+  }
+  .track-row:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* subtle highlight */
+  }
+  div.flex-row.crowded {
+    cursor: pointer; 
+    transition: background 0.2s;
+  }
 
 block content
   h1 Top Tracks
@@ -17,7 +19,7 @@ block content
   ul.flow-gap.dense(role='list')
     each track in tracks
       li
-        div.flex-row.crowded(data-spotify-uri=track.spotifyUrl)
+        div.flex-row.crowded(class='track-item', style='cursor: pointer; transition: background 0.2s;', data-spotify-uri=track.spotifyUrl)
           img(src=track.albumArt, style='width: 5em; aspect-ratio: 1/1; object-fit: cover;')
           div.flex-column.packed(style='justify-content: center; align-items: flex-start; font-size: 1.2em;')
             div

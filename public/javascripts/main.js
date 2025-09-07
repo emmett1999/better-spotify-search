@@ -1,36 +1,17 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  const loginBtn = document.getElementById("login-btn");
+  
+  // Get login status and create login button based on if user is logged in or not
+  getLoginStatusAndCreateLoginButton();
 
-  try {
-    // get login status
-    const res = await fetch("/login/status", {
-      credentials: "include" // send cookies!
-    });
-    const data = await res.json();
 
-    if (data.isAuthenticated) {
-      console.log("User is logged in via session");
-      loginBtn.textContent = "Logout";
-      loginBtn.href = "/login/logout";
-    } else {
-      console.log("User is NOT logged in");
-      loginBtn.textContent = "Login";
-      loginBtn.href = "/login/authorize";
-    }
-  } catch (err) {
-    console.error("Error checking login status:", err);
-  }
-
-  // TODO: ************ NEW SHIT I GOTTA VERIFY BELOW ************
-
-  // --- Spotify Web Playback SDK setup ---
-  // --- PLAYER BAR ELEMENTS ---
+  /* === PLAYER BAR ELEMENTS === */
   const playerBar = document.getElementById("player-bar");
   const trackInfo = playerBar.querySelector(".track-info");
-  const playBtn = playerBar.querySelector("#play-btn");
-  const pauseBtn = playerBar.querySelector("#pause-btn");
+  const playButton = playerBar.querySelector("#play-btn");
+  const pauseButton = playerBar.querySelector("#pause-btn");
 
-  // --- LOAD SPOTIFY SDK ---
+  /* === LOAD SPOTIFY SDK === */
+  // TODO: check examples of creating Spotify SDK to see if this could be improved
   const script = document.createElement("script");
   script.src = "https://sdk.scdn.co/spotify-player.js";
   document.body.appendChild(script);
@@ -69,35 +50,62 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.log("Player ready with Device ID:", device_id);
         deviceId = device_id;
         await transferPlaybackHere(deviceId, accessToken);
+
+        // --- Clickable tracks on page ---
+        document.querySelectorAll(".track-item").forEach(trackEl => {
+          trackEl.addEventListener("click", async () => {
+            const uri = trackEl.dataset.spotifyUri;
+            if (!uri || !deviceId) return;
+            await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
+              method: "PUT",
+              headers: {
+                "Authorization": `Bearer ${accessToken}`,
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({ uris: [uri] })
+            });
+          });
+        });
+
+
       });
 
       await player.connect();
 
       // --- PLAY / PAUSE BUTTONS ---
-      playBtn.addEventListener("click", () => player.resume().catch(console.error));
-      pauseBtn.addEventListener("click", () => player.pause().catch(console.error));
+      playButton.addEventListener("click", () => player.resume().catch(console.error));
+      pauseButton.addEventListener("click", () => player.pause().catch(console.error));
     } catch (err) {
       console.error("Error initializing Spotify Web Player:", err);
     }
 
-    // --- Clickable tracks on page ---
-    document.querySelectorAll(".track-item").forEach(trackEl => {
-      trackEl.addEventListener("click", async () => {
-        const uri = trackEl.dataset.spotifyUri;
-        if (!uri || !deviceId) return;
-        await fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
-          method: "PUT",
-          headers: {
-            "Authorization": `Bearer ${accessToken}`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ uris: [uri] })
-        });
-      });
-    });
   };
 
 });
+
+async function getLoginStatusAndCreateLoginButton() {
+  const loginButton = document.getElementById("login-btn");
+
+  try {
+    const res = await fetch("/login/status", {
+      credentials: "include" // sends cookies
+    });
+    // TODO: verify the cookies are actually getting sent
+    const data = await res.json();
+
+    if (data.isAuthenticated) {
+      console.log("User is logged in via session");
+      loginButton.textContent = "Logout";
+      loginButton.href = "/login/logout";
+    } else {
+      console.log("User is NOT logged in");
+      loginButton.textContent = "Login";
+      loginButton.href = "/login/authorize";
+    }
+  } catch (err) {
+    console.error("Error checking login status:", err);
+  }
+}
 
 async function transferPlaybackHere(device_id, accessToken) {
   await fetch('https://api.spotify.com/v1/me/player', {
